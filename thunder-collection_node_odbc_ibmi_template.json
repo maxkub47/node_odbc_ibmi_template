@@ -1,0 +1,111 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "node_odbc_ibmi_template",
+    "dateExported": "2024-05-17T12:18:56.830Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "2f918bf2-bf22-423a-a3ce-84914f3714d8",
+            "name": "/example",
+            "containerId": "",
+            "created": "2024-05-17T09:04:17.057Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "151234d7-ffd9-4da2-b99a-d5aa4bfbef42",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "",
+            "name": "/",
+            "url": "localhost:4000/",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-05-17T08:19:56.024Z",
+            "modified": "2024-05-17T08:20:12.701Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "738f49a5-4d84-4ac0-af58-cb745a1783f6",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "",
+            "name": "/login",
+            "url": "localhost:4000/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-05-17T08:34:37.588Z",
+            "modified": "2024-05-17T11:54:43.670Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"username\" : \"MAXKUB\",\n  \"password\" : \"maxkub\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "75b4b54f-76b3-4b89-b3b1-67aba63d3cef",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "2f918bf2-bf22-423a-a3ce-84914f3714d8",
+            "name": "/clcmd",
+            "url": "localhost:4000/example/clcmd",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-05-17T09:04:34.397Z",
+            "modified": "2024-05-17T09:04:58.878Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2e993ada-39d0-40e1-b939-c2cd9bbb3513",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "2f918bf2-bf22-423a-a3ce-84914f3714d8",
+            "name": "/callproc",
+            "url": "localhost:4000/example/callproc",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2024-05-17T09:16:57.016Z",
+            "modified": "2024-05-17T09:34:27.581Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"numa\" : 2,\n  \"numb\" : 3\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "ed9da067-9e39-47b4-b1c7-5660322cbca2",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "2f918bf2-bf22-423a-a3ce-84914f3714d8",
+            "name": "/query",
+            "url": "localhost:4000/example/query",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2024-05-17T09:41:50.203Z",
+            "modified": "2024-05-17T09:42:44.663Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "bd7f5237-78bc-4962-8f3b-660e6eaf060d",
+            "colId": "f76450fd-ab85-4830-85bb-ab5bacb60756",
+            "containerId": "2f918bf2-bf22-423a-a3ce-84914f3714d8",
+            "name": "/chglibl",
+            "url": "localhost:4000/example/chgLibl",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-05-17T10:57:35.062Z",
+            "modified": "2024-05-17T10:57:55.932Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
