@@ -3,7 +3,7 @@ const { XMLParser }  = require('fast-xml-parser');
 const _ = require('lodash')
 
 const conn = new Connection({
-    transport: "ssh",
+    transport: "odbc",
     transportOptions: {
       host: process.env.DB_HOST,
       username: process.env.DB_ID,

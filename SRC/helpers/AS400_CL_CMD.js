@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Connection, CommandCall } = require("itoolkit");
 const { parseString } = require("xml2js");
 const connection = new Connection({
-  transport: "ssh",
+  transport: "odbc",
   transportOptions: {
     host: process.env.DB_HOST,
     username: process.env.DB_ID,
