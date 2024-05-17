@@ -1,0 +1,2 @@
+copy and rename to path
+/node_modules/odbc/lib/bindings/napi-v6/odbc.node
