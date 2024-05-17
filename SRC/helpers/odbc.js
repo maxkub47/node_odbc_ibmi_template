@@ -61,15 +61,25 @@ const insertWithCommitAndRollback = async (statement, parameters = []) => {
 
 // setEnvValue("DB_DBQ", "MAXLIB1 ,MAXLIB, MAXTOOL");
 
-const connectionString = [
+let connectionString = [
   `DRIVER=IBM i Access ODBC Driver`,
   `SYSTEM=${process.env.DB_HOST}`,
   `UID=${process.env.DB_ID}`,
   `Password=${process.env.DB_PASSWORD}`,
   `Naming=1`,
-  `DBQ=${''})
-  }`,
+  `DBQ=${process.env.DB_DBQ}`,
 ].join(';')
+
+const setDBQ = (dbqValue) => {
+  connectionString = [
+    `DRIVER=IBM i Access ODBC Driver`,
+    `SYSTEM=${process.env.DB_HOST}`,
+    `UID=${process.env.DB_ID}`,
+    `Password=${process.env.DB_PASSWORD}`,
+    `Naming=1`,
+    `DBQ=${dbqValue}`,
+  ].join(';')
+}
 
 //Database.connect(connectionString)
 
@@ -79,4 +89,5 @@ module.exports = {
   callProcedure,
   insertWithCommitAndRollback,
   connectionString,
+  setDBQ
 }

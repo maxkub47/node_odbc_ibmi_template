@@ -1,5 +1,5 @@
 const { CL_CMD } = require('../../helpers/AS400_CL_CMD')
-const { callProcedure, query } = require('../../helpers/odbc')
+const { callProcedure, query, setConnectionString, setDBQ } = require('../../helpers/odbc')
 
 const rtvjoba = async () => {
   const cmd = 'RTVJOBA USRLIBL(?) SYSLIBL(?)'
@@ -17,29 +17,19 @@ const callProc = async ({ numa, numb }) => {
 }
 
 const getVehicle = async () => {
-  let result = await query('SELECT * FROM prd1dblib.fi010P')
+  let result = await query('SELECT * FROM fi010P limit 1')
   console.log(result)
   return result
 }
 
 const chgLibl = async () => {
-  // let result = await query('SELECT * FROM file1')
-  // console.log(result)
-  // result = await query('SELECT * FROM file1')
-  // console.log(result)
-  // return result
-
-  if (!req.session) {
-    req.session = {};
-  }
-
-  // Set DB_DBQ on the session
-  req.session.DB_DBQ = 'MAXLIB2, MAXLIB , MAXTOOL';
-
-  // Now you can call Database.connect
-  Database.connect(req).then(() => {
-    // Do something after the database has connected
-  });
+  setDBQ('MAXLIB1')
+  let result = await query('SELECT * FROM file1')
+  console.log(result)
+  setDBQ('MAXLIB2')
+  result = await query('SELECT * FROM file1')
+  //setDBQ(process.env.DB_DBQ)
+  return result
 }
 
 module.exports = {

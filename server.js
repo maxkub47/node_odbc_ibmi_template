@@ -20,10 +20,6 @@ app.use(cors());
 app.use(morgan("dev"));
 //app.use(jwt())
 app.use(session({secret: process.env.SES_SECRET, resave: true, saveUninitialized: true}))
-app.use((req, res, next) => {
-  req.session.DB_DBQ = 'MAXLIB1 , MAXLIB, MAXTOOL';
-  next();
-});
 
 //Routes
 app.get('/', (req, res) => {
@@ -43,4 +39,4 @@ Database.connect(connectionString).then(() => {
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
   });
-});
+});  
