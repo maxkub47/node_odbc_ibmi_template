@@ -1,0 +1,133 @@
+{
+    "info": {
+        "_postman_id": "421cd959-6954-4e38-9fba-8fbadfd10c43",
+        "name": "node_odbc_ibmi_template",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "/example",
+            "item": [
+                {
+                    "name": "/clcmd",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:4000/example/clcmd",
+                            "path": [
+                                "example",
+                                "clcmd"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "4000"
+                        }
+                    }
+                },
+                {
+                    "name": "/callproc",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:4000/example/callproc",
+                            "path": [
+                                "example",
+                                "callproc"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "4000"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"numa\" : 2,\n  \"numb\" : 3\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "/query",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:4000/example/query",
+                            "path": [
+                                "example",
+                                "query"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "4000"
+                        }
+                    }
+                },
+                {
+                    "name": "/chglibl",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "localhost:4000/example/chgLibl",
+                            "path": [
+                                "example",
+                                "chgLibl"
+                            ],
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "4000"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "/",
+            "request": {
+                "method": "GET",
+                "url": {
+                    "raw": "localhost:4000/",
+                    "path": [
+                        ""
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                }
+            }
+        },
+        {
+            "name": "/login",
+            "request": {
+                "method": "POST",
+                "url": {
+                    "raw": "localhost:4000/login",
+                    "path": [
+                        "login"
+                    ],
+                    "host": [
+                        "localhost"
+                    ],
+                    "port": "4000"
+                },
+                "body": {
+                    "mode": "raw",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    },
+                    "raw": "{\n  \"username\" : \"MAXKUB\",\n  \"password\" : \"maxkub\"\n}"
+                }
+            }
+        }
+    ]
+}
