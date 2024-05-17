@@ -6,7 +6,6 @@ const { errorMsg } = require('../utils/errormsg.js')
 const login = async (req,res) => {
     const {username , password} = req.body
     console.log(username,password)
-    req.session.userName = username;
     let isLogin = await QSYGETPH(username,password)
 
     if(isLogin === ''){

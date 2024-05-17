@@ -2,6 +2,7 @@ const express = require("express");
 const { json } = require("body-parser");
 const morgan = require("morgan");
 const cors = require("cors");
+
 const session = require('express-session')
 
 const jwt = require('./SRC/helpers/jwt');
@@ -17,8 +18,12 @@ const port = process.env.PORT || 3000;
 app.use(json());
 app.use(cors());
 app.use(morgan("dev"));
-app.use(jwt())
+//app.use(jwt())
 app.use(session({secret: process.env.SES_SECRET, resave: true, saveUninitialized: true}))
+app.use((req, res, next) => {
+  req.session.DB_DBQ = 'MAXLIB1 , MAXLIB, MAXTOOL';
+  next();
+});
 
 //Routes
 app.get('/', (req, res) => {
@@ -27,8 +32,11 @@ app.get('/', (req, res) => {
 
 app.post('/login', login )
 
+app.use('/example', require('./SRC/pages/Example/routes'))
+
 // global error handler
 app.use(errorHandler)
+
 
 //start NodeJS
 Database.connect(connectionString).then(() => {

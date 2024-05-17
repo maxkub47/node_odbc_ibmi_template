@@ -1,84 +1,82 @@
 const odbc = require('odbc')
-const { getlibl } = require('../utils/chklibl')
+const { setEnvValue } = require('../utils/setdotenv')
 
 class Database {
-    static pool
-    static async connect(connectionString) {
-      this.pool = await odbc.pool(connectionString)
-      this.pool.close()
-    }
+  static pool
+
+  static async connect(connectionString) {
+ 
+    console.log(connectionString)
+    this.pool = await odbc.pool(connectionString)
+  }
+  static async close() {
+    await this.pool.close()
+  }
 }
 
-async function executeQuery(statement, parameters = []) {
-    try {
-        const connection = await odbc.connect(connectionString)
-        const result = await connection.query(statement, parameters)
-        await connection.close()
-        return result
-    } catch (error) {
-        console.error('Error executing query:', error)
-        throw error
-    }
+const query = async (statement, parameters = []) => {
+  console.log(connectionString)
+  const connection = await odbc.pool(connectionString)
+  try {
+    return await connection.query(statement, parameters)
+  } finally {
+    connection.close()
+  }
 }
 
-async function callProcedure(catalog, library, procedure, bindingsValues = []) {
-    try {
-        const connection = await odbc.connect(connectionString)
-        const procedureCall = `{CALL ${catalog}.${library}.${procedure}(?)}`
-        const result = await connection.callProcedure(procedureCall, bindingsValues)
-        await connection.close()
-        return result
-    } catch (error) {
-        console.error('Error calling procedure:', error)
-        throw error
-    }
+const callProcedure = async (
+  catalog,
+  library,
+  procedure,
+  bindingsValues = []
+) => {
+  const connection = await Database.pool.connect()
+  try {
+    return connection.callProcedure(catalog, library, procedure, bindingsValues)
+  } finally {
+    connection.close()
+  }
 }
 
-async function insertWithCommitAndRollback(statement, parameters = []) {
-    let connection
-    try {
-        connection = await odbc.connect(connectionString)
-        await connection.beginTransaction()
-
-        const result = await connection.query(statement, parameters)
-
-        await connection.commit()
-        await connection.close()
-
-        return result
-    } catch (error) {
-        console.error('Error executing insert with commit and rollback:', error)
-        if (connection) {
-            await connection.rollback()
-            await connection.close()
-        }
-        throw error
-    }
+const insertWithCommitAndRollback = async (statement, parameters = []) => {
+  const connection = await Database.pool.connect()
+  try {
+    await connection.beginTransaction()
+    const result = await connection.query(statement, parameters)
+    await connection.commit()
+    return result
+  } catch (error) {
+    await connection.rollback()
+    throw error
+  } finally {
+    connection.close()
+  }
 }
+// const checkLiblValue = async (USER) => {
+//   const newLibl = await getlibl({ USER })
+//   return newLibl === undefined || newLibl === null
+//     ? process.env.DB_DBQ
+//     : newLibl
+// }
 
-function checkLiblValue(libl) {
-    libl = getlibl({ USER:'MAX' })
-    if (libl === undefined || libl === null) {
-        return process.env.DB_DBQ
-    }
-    return libl
-}
+// setEnvValue("DB_DBQ", "MAXLIB1 ,MAXLIB, MAXTOOL");
 
 const connectionString = [
-    `DRIVER=IBM i Access ODBC Driver`,
-    `SYSTEM=${process.env.DB_HOST}`,
-    `UID=${process.env.DB_ID}`,
-    `Password=${process.env.DB_PASSWORD}`,
-    `Naming=1`,
-    //`DBQ=,${process.env.DB_DBQ ? process.env.DB_DBQ : '*USRLIBL'}`,
-    `DBQ=, ${checkLiblValue()}`,
+  `DRIVER=IBM i Access ODBC Driver`,
+  `SYSTEM=${process.env.DB_HOST}`,
+  `UID=${process.env.DB_ID}`,
+  `Password=${process.env.DB_PASSWORD}`,
+  `Naming=1`,
+  `DBQ=${''})
+  }`,
 ].join(';')
 
+//Database.connect(connectionString)
+
 module.exports = {
-    Database,
-    executeQuery,
-    callProcedure,
-    insertWithCommitAndRollback,
-    checkLiblValue,
-    connectionString,
+  Database,
+  query,
+  callProcedure,
+  insertWithCommitAndRollback,
+  connectionString,
 }
