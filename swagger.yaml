@@ -1,0 +1,62 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: http://localhost:9106
+    description: Internal staging server for testing
+  - url: http://172.16.1.240:9106
+    description: AS400 Server
+paths:
+  /:
+    get:
+      summary: Returns Welcome to IBM i NodeJS Template
+      responses:
+        '200': # status code
+          description: Success
+  /login:
+    post:
+      summary: Login
+      requestBody:
+        require: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Not Authorize
+        '500':
+          description: Internal Server Error
+  /example/clcmd:
+    get:
+      summary: test use CL CMD by itoolkit
+      responses:
+        '200': # status code
+          description: Success
+  /example/callproc:
+    get:
+      summary: test call procedure by odbc
+      responses:
+        '200': # status code
+          description: Success
+  /example/query:
+    get:
+      summary: test query db2 by sql
+      responses:
+        '200': # status code
+          description: Success
+  /example/chglibl:
+    get:
+      summary: test change library List 
+      responses:
+        '200': # status code
+          description: Success      
